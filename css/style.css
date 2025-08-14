@@ -68,6 +68,40 @@ p {
     margin-bottom: 20px;
 }
 
+/* Travel Log Entry */
+.trip-entry {
+    border-left: 4px solid #007acc;
+    padding-left: 20px;
+    margin-bottom: 40px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.trip-entry h2 {
+    color: #007acc;
+    margin-bottom: 10px;
+}
+
+.trip-entry p {
+    margin-bottom: 10px;
+}
+
+.trip-entry img {
+    margin-top: 15px;
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* Section Titles */
+.section-title {
+    font-size: 1.5em;
+    margin: 50px 0 20px;
+    border-bottom: 2px solid #007acc;
+    padding-bottom: 5px;
+    color: #333;
+}
+
 /* Footer */
 footer {
     text-align: center;
@@ -78,4 +112,3 @@ footer {
     margin-top: 40px;
     background-color: #fafafa;
 }
-
