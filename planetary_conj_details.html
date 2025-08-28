@@ -37,6 +37,12 @@
   <nav class="navbar">
     <a href="index.html">Home</a>
     <a href="projects.html">Projects</a>
+    <div class="dropdown" style="display:inline-block;position:relative;">
+      <a href="#" class="dropbtn" style="padding-right:20px;">More ▼</a>
+      <div class="dropdown-content" style="display:none;position:absolute;left:0;top:100%;background:#fff;min-width:220px;box-shadow:0 2px 8px rgba(0,0,0,0.08);z-index:10;">
+        <a href="planetary_conj_details.html">Mean Motion Resonances & Planetary Conjunctions</a>
+      </div>
+    </div>
     <a href="#">Contact</a>
   </nav>
 </header>
@@ -45,7 +51,7 @@
   <div class="details-container" style="display:block;">
     <img src="images/kirkwood_gaps.png" alt="Asteroid Main-Belt Distribution: Kirkwood Gaps" style="float:left;max-width:350px;margin-right:32px;margin-bottom:16px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
     <div class="details-content">
-      <p style="font-size:0.95em;margin-top:8px;">Kirkwood gaps in the asteroid belt (<a href="https://en.wikipedia.org/wiki/Kirkwood_gap" target="_blank">learn more</a>)</p>
+      <p style="font-size:0.95em;margin-top:8px;"> <a href="https://en.wikipedia.org/wiki/Kirkwood_gap" target="_blank">Kirkwood gaps</a> in the main asteroid belt</p>
       <p>In our Solar System, Neptune orbits the Sun three times for every two orbits of Pluto. Such an integer ratio between a pair of orbital periods is called a <b>mean motion resonance</b> (MMR), so we say that Neptune and Pluto are in a 3:2 MMR. Much more than a simple coincidence, such MMRs act as a double-edged sword that in some scenarios orchestrate a stable, repeating clockwork dance, while in others they drive chaos and dynamical instabilities.</p>
       <p>The crossing orbits of Neptune and Pluto provide an example of a stabilizing MMR. If their angular frequencies had no relationship to one another, eventually the two bodies would by chance end up at the same location at the same time and collide. However, the MMR synchronizes their motion so that the two never meet at the same place; it ensures that the faster Neptune always overtakes Pluto near the azimuthal location where the two orbits are maximally separated. As a result, the planets never risk close approaches or collisions, so here the resonance acts to stabilize the system.</p>
       <p>On the other hand, <a href="https://en.wikipedia.org/wiki/Kirkwood_gap" target="_blank">Kirkwood gaps</a> in the Asteroid belt illustrate the destabilizing effects of MMRs. <i>(See figure to the left.)</i> Ultimately, the reason why MMRs play an outsized role in orbital dynamics is the fact that they make it possible for small gravitational perturbations to repeat, so that they build up coherently and lead to large cumulative effects.</p>
@@ -62,5 +68,25 @@
 <footer>
   &copy; 2025 Elizabeth Jones
 </footer>
+<script>
+  // Simple dropdown menu logic
+  document.addEventListener('DOMContentLoaded', function() {
+    var dropdown = document.querySelector('.dropdown');
+    var btn = dropdown.querySelector('.dropbtn');
+    var content = dropdown.querySelector('.dropdown-content');
+    btn.addEventListener('mouseover', function() {
+      content.style.display = 'block';
+    });
+    btn.addEventListener('mouseout', function() {
+      setTimeout(function() { content.style.display = 'none'; }, 200);
+    });
+    content.addEventListener('mouseover', function() {
+      content.style.display = 'block';
+    });
+    content.addEventListener('mouseout', function() {
+      content.style.display = 'none';
+    });
+  });
+</script>
 </body>
 </html>
