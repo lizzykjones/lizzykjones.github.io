@@ -175,6 +175,70 @@
     </div>
   </div>
 
+  <!-- Sticky Horizontal Timeline -->
+  <div class="trip-timeline-wrap" id="trip-timeline-wrap">
+    <div class="trip-timeline">
+
+      <div class="trip-year-group" id="group-gapyear">
+        <div class="trip-year-label">Gap Year &rsquo;25&ndash;26</div>
+
+        <div class="timeline-node active" id="tnode-spain" data-dest="spain" onclick="jumpTo('spain')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">Spain</div>
+        </div>
+        <div class="timeline-node" id="tnode-switzerland" data-dest="switzerland" onclick="jumpTo('switzerland')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">Switzerland</div>
+        </div>
+        <div class="timeline-node" id="tnode-turkey" data-dest="turkey" onclick="jumpTo('turkey')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">Turkey</div>
+        </div>
+        <div class="timeline-node" id="tnode-washington" data-dest="washington" onclick="jumpTo('washington')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">Cascades</div>
+        </div>
+        <div class="timeline-node" id="tnode-nepal" data-dest="nepal" onclick="jumpTo('nepal')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">Nepal</div>
+        </div>
+        <div class="timeline-node" id="tnode-malaysia" data-dest="malaysia" onclick="jumpTo('malaysia')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">Malaysia</div>
+        </div>
+        <div class="timeline-node" id="tnode-korea" data-dest="korea" onclick="jumpTo('korea')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">Korea</div>
+        </div>
+        <div class="timeline-node" id="tnode-japan" data-dest="japan" onclick="jumpTo('japan')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">Japan</div>
+        </div>
+        <div class="timeline-node" id="tnode-vietnam" data-dest="vietnam" onclick="jumpTo('vietnam')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">Vietnam</div>
+        </div>
+        <div class="timeline-node" id="tnode-hawaii" data-dest="hawaii" onclick="jumpTo('hawaii')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">Hawaii</div>
+        </div>
+        <div class="timeline-node" id="tnode-china" data-dest="china" onclick="jumpTo('china')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">China</div>
+        </div>
+        <div class="timeline-node" id="tnode-taiwan" data-dest="taiwan" onclick="jumpTo('taiwan')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">Taiwan</div>
+        </div>
+        <div class="timeline-node" id="tnode-cameroon" data-dest="cameroon" onclick="jumpTo('cameroon')">
+          <div class="timeline-node-dot"></div>
+          <div class="timeline-node-label">Cameroon</div>
+        </div>
+      </div><!-- /group-gapyear -->
+
+    </div><!-- /trip-timeline -->
+  </div><!-- /trip-timeline-wrap -->
+
   <!-- Destinations -->
   <main class="main-content">
 
@@ -546,6 +610,8 @@
             .attr('r', 5.5)
             .attr('fill', '#4a6fa5')
             .style('transition', 'fill 0.15s');
+
+          g.append('title').text(d.name);
         });
       })
       .catch(() => {
@@ -571,12 +637,13 @@
       }
     }
 
-    // ---- Jump to destination (from map pin) ----
+    // ---- Jump to destination (from map pin or timeline node) ----
     function jumpTo(id) {
       const el = document.getElementById('dest-' + id);
       if (!el) return;
       const navH = document.querySelector('nav').offsetHeight || 56;
-      const offset = navH + 16;
+      const timelineH = document.getElementById('trip-timeline-wrap').offsetHeight || 48;
+      const offset = navH + timelineH + 16;
       const top = el.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
       if (!el.classList.contains('open')) {
@@ -585,6 +652,31 @@
         el.classList.add('open');
       }
     }
+
+    // ---- Timeline: highlight active node on scroll ----
+    const cardIds = [
+      'spain','switzerland','turkey','washington','nepal',
+      'malaysia','korea','japan','vietnam','hawaii','china','taiwan','cameroon'
+    ];
+
+    const observers = {};
+    cardIds.forEach(id => {
+      const card = document.getElementById('dest-' + id);
+      if (!card) return;
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const node = document.getElementById('tnode-' + id);
+          if (!node) return;
+          if (entry.isIntersecting) {
+            document.querySelectorAll('.timeline-node').forEach(n => n.classList.remove('active'));
+            node.classList.add('active');
+            node.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+      obs.observe(card);
+      observers[id] = obs;
+    });
   </script>
 
 </body>
