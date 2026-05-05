@@ -17,28 +17,11 @@
       max-width: 820px;
       margin: 0 auto;
     }
-    .world-map {
+    #world-map-container svg {
       width: 100%;
       height: auto;
       display: block;
       border-radius: 4px;
-    }
-    .map-ocean {
-      fill: #eef0f3;
-    }
-    .land {
-      fill: #ddd8d0;
-      stroke: #ccc7be;
-      stroke-width: 0.6;
-      stroke-linejoin: round;
-    }
-    .map-pin {
-      fill: #4a6fa5;
-      cursor: pointer;
-      transition: fill 0.15s;
-    }
-    .map-pin:hover {
-      fill: #2c4d7f;
     }
     .map-caption {
       font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -256,296 +239,7 @@
   <!-- World Map -->
   <section class="map-section">
     <div class="inner">
-      <svg class="world-map" viewBox="0 0 900 450" xmlns="http://www.w3.org/2000/svg" aria-label="World map showing visited destinations">
-
-        <!-- Ocean -->
-        <rect class="map-ocean" width="900" height="450" rx="4"/>
-
-        <!-- North America -->
-        <path class="land" d="
-          M 30,87 L 38,63 L 98,50 L 175,50 L 238,58
-          L 275,68 L 313,75 L 313,108 L 290,118
-          L 275,120 L 268,148 L 258,163 L 255,180
-          L 237,195 L 220,185 L 205,178 L 190,170
-          L 175,168 L 163,153 L 155,140 L 143,118
-          L 125,88 Z
-        "/>
-
-        <!-- Central America / Caribbean connector -->
-        <path class="land" d="
-          M 237,195 L 248,198 L 255,200 L 258,205
-          L 253,210 L 245,207 L 237,200 Z
-        "/>
-
-        <!-- Greenland (simplified) -->
-        <path class="land" d="
-          M 295,30 L 330,20 L 355,25 L 355,45
-          L 335,55 L 310,50 L 295,40 Z
-        "/>
-
-        <!-- South America -->
-        <path class="land" d="
-          M 258,205 L 283,200 L 300,208 L 330,210
-          L 355,213 L 363,213 L 358,235 L 350,255
-          L 345,275 L 335,290 L 325,315 L 318,340
-          L 310,360 L 300,365 L 288,363
-          L 275,345 L 268,318 L 263,298
-          L 258,275 L 253,248 L 250,225
-          L 255,210 Z
-        "/>
-
-        <!-- Europe -->
-        <path class="land" d="
-          M 428,133 L 428,118 L 435,108
-          L 443,100 L 453,98 L 460,92
-          L 463,80 L 473,72 L 488,60
-          L 500,50 L 513,48 L 520,58
-          L 525,75 L 520,88 L 515,98
-          L 510,108 L 505,118 L 498,128
-          L 488,133 L 480,128 L 475,118
-          L 470,115 L 463,115 L 458,120
-          L 450,125 L 443,128 Z
-        "/>
-
-        <!-- Scandinavia extension -->
-        <path class="land" d="
-          M 463,80 L 470,65 L 480,55 L 490,48
-          L 500,50 L 488,60 L 473,72 Z
-        "/>
-
-        <!-- UK/Ireland (simplified blobs) -->
-        <ellipse class="land" cx="428" cy="90" rx="8" ry="12" transform="rotate(-15 428 90)"/>
-        <ellipse class="land" cx="417" cy="92" rx="5" ry="7"/>
-
-        <!-- Africa -->
-        <path class="land" d="
-          M 418,158 L 428,140 L 438,133 L 453,128
-          L 468,130 L 475,133 L 490,135
-          L 508,140 L 520,148 L 530,158
-          L 543,175 L 553,195 L 555,215
-          L 553,230 L 550,248 L 548,265
-          L 543,285 L 538,300 L 530,313
-          L 513,318 L 495,315 L 480,308
-          L 468,295 L 460,278 L 455,260
-          L 450,240 L 448,220 L 450,213
-          L 455,205 L 460,200 L 468,205
-          L 470,213 L 468,220 L 460,218
-          L 455,215 L 453,218 L 458,225
-          L 465,225 L 470,218 L 472,210
-          L 468,205 L 460,200 L 450,205
-          L 445,215 L 443,225 L 440,215
-          L 435,205 L 428,198 L 418,190
-          L 413,180 L 410,168 Z
-        "/>
-
-        <!-- Africa west coast simplification -->
-        <path class="land" d="
-          M 408,155 L 413,145 L 418,135 L 420,128
-          L 428,133 L 428,140 L 418,158
-          L 410,168 L 408,155 Z
-        "/>
-
-        <!-- Madagascar -->
-        <ellipse class="land" cx="558" cy="280" rx="7" ry="18" transform="rotate(10 558 280)"/>
-
-        <!-- Asia (mainland) -->
-        <path class="land" d="
-          M 515,125 L 523,118 L 533,113 L 548,110
-          L 563,108 L 588,105 L 615,100
-          L 650,95 L 688,88 L 725,82
-          L 760,78 L 793,80 L 810,88 L 813,100
-          L 808,115 L 800,125 L 790,132
-          L 778,140 L 770,148 L 760,158
-          L 750,165 L 740,170 L 728,175
-          L 720,178 L 713,185 L 710,195
-          L 708,210 L 706,222
-          L 698,220 L 690,215 L 678,210
-          L 663,205 L 650,200 L 643,205
-          L 638,210 L 633,205 L 625,198
-          L 618,188 L 610,178 L 600,170
-          L 590,168 L 580,165 L 570,162
-          L 560,165 L 553,170 L 548,178
-          L 543,185 L 540,192 L 538,200
-          L 543,205 L 548,198 L 553,190
-          L 558,182 L 565,175 L 573,170
-          L 583,168 L 593,168 L 600,172
-          L 605,178 L 603,185 L 598,192
-          L 590,198 L 580,202 L 573,205
-          L 565,202 L 560,195 L 558,188
-          L 560,182 L 555,188 L 550,195
-          L 548,205 L 555,210 L 565,210
-          L 575,205 L 580,195 L 585,190
-          L 593,185 L 600,182 L 608,182
-          L 615,185 L 620,192 L 623,200
-          L 628,205 L 635,208 L 643,208
-          L 650,205 L 658,208 L 665,212
-          L 672,215 L 680,215 L 690,215
-          L 700,215 L 708,215 L 710,205
-          L 713,198 L 715,188 L 718,180
-          L 720,172 L 718,165 L 710,160
-          L 705,155 L 698,148 L 693,140
-          L 688,132 L 683,128 L 678,132
-          L 673,138 L 668,140 L 663,135
-          L 658,128 L 653,122 L 648,118
-          L 643,115 L 638,118 L 633,125
-          L 628,130 L 623,128 L 618,120
-          L 615,113 L 618,108 L 625,105
-          L 633,103 L 640,105 L 645,112
-          L 650,118 L 655,122 L 658,118
-          L 655,110 L 648,103 L 640,98
-          L 630,95 L 618,96 L 608,100
-          L 600,105 L 593,108 L 585,108
-          L 578,105 L 570,100 L 563,98
-          L 558,100 L 553,105 L 548,110
-          L 543,115 L 538,118 L 533,118
-          L 528,120 L 523,122 L 518,122 Z
-        "/>
-
-        <!-- Simplified Asia: use cleaner path -->
-        <!-- (replace complex path with clean simplified version) -->
-
-        <!-- Arabian Peninsula -->
-        <path class="land" d="
-          M 543,148 L 548,140 L 555,133
-          L 563,128 L 573,130 L 580,138
-          L 583,150 L 580,163 L 573,173
-          L 563,180 L 553,183 L 545,178
-          L 540,168 L 540,158 Z
-        "/>
-
-        <!-- India -->
-        <path class="land" d="
-          M 600,138 L 615,133 L 630,133
-          L 643,138 L 650,148 L 653,160
-          L 650,173 L 643,183 L 633,190
-          L 623,193 L 613,190 L 605,183
-          L 598,173 L 595,160 L 598,148 Z
-        "/>
-
-        <!-- SE Asia peninsula -->
-        <path class="land" d="
-          M 668,160 L 675,155 L 683,155
-          L 690,158 L 695,165 L 693,175
-          L 688,183 L 680,188 L 673,185
-          L 668,178 L 666,170 Z
-        "/>
-
-        <!-- Japan (islands) -->
-        <path class="land" d="
-          M 778,125 L 783,118 L 790,113
-          L 798,112 L 808,112 L 812,118
-          L 808,125 L 800,130 L 790,132
-          L 783,130 Z
-        "/>
-        <!-- Kyushu -->
-        <ellipse class="land" cx="778" cy="135" rx="5" ry="7"/>
-
-        <!-- Taiwan -->
-        <ellipse class="land" cx="753" cy="163" rx="4" ry="7" transform="rotate(10 753 163)"/>
-
-        <!-- Philippines (simplified) -->
-        <circle class="land" cx="740" cy="188" r="4"/>
-        <circle class="land" cx="745" cy="195" r="3"/>
-
-        <!-- Sri Lanka -->
-        <ellipse class="land" cx="623" cy="198" rx="4" ry="6"/>
-
-        <!-- Indonesia (simplified islands) -->
-        <ellipse class="land" cx="693" cy="228" rx="20" ry="6" transform="rotate(-5 693 228)"/>
-        <ellipse class="land" cx="730" cy="232" rx="15" ry="5"/>
-        <ellipse class="land" cx="760" cy="230" rx="10" ry="6" transform="rotate(5 760 230)"/>
-
-        <!-- Australia -->
-        <path class="land" d="
-          M 700,265 L 718,250 L 738,242
-          L 758,240 L 775,245 L 790,255
-          L 800,268 L 808,283 L 813,298
-          L 810,315 L 800,325 L 785,328
-          L 768,325 L 750,315 L 738,302
-          L 725,290 L 713,278 L 700,268 Z
-        "/>
-        <!-- Western Australia bump -->
-        <path class="land" d="
-          M 700,265 L 695,270 L 690,280
-          L 688,295 L 690,308 L 695,315
-          L 705,318 L 715,315 L 720,308
-          L 718,295 L 713,278 Z
-        "/>
-
-        <!-- New Zealand -->
-        <ellipse class="land" cx="845" cy="338" rx="7" ry="16" transform="rotate(-25 845 338)"/>
-        <ellipse class="land" cx="853" cy="315" rx="5" ry="11" transform="rotate(-20 853 315)"/>
-
-        <!-- ===================== -->
-        <!-- DESTINATION PINS      -->
-        <!-- ===================== -->
-
-        <!-- Spain — Camino de Santiago (lng=-3, lat=42) -->
-        <circle class="map-pin" cx="443" cy="120" r="5.5" onclick="scrollTo('spain')" aria-label="Spain">
-          <title>Spain — Camino de Santiago</title>
-        </circle>
-
-        <!-- Switzerland (lng=8, lat=47) -->
-        <circle class="map-pin" cx="470" cy="108" r="5.5" onclick="scrollTo('switzerland')" aria-label="Switzerland">
-          <title>Switzerland</title>
-        </circle>
-
-        <!-- Turkey (lng=35, lat=39) -->
-        <circle class="map-pin" cx="538" cy="128" r="5.5" onclick="scrollTo('turkey')" aria-label="Turkey">
-          <title>Turkey</title>
-        </circle>
-
-        <!-- Washington Cascades (lng=-121, lat=47) -->
-        <circle class="map-pin" cx="148" cy="108" r="5.5" onclick="scrollTo('washington')" aria-label="Washington Cascades">
-          <title>Washington Cascades</title>
-        </circle>
-
-        <!-- Nepal (lng=84, lat=28) -->
-        <circle class="map-pin" cx="660" cy="155" r="5.5" onclick="scrollTo('nepal')" aria-label="Nepal">
-          <title>Nepal</title>
-        </circle>
-
-        <!-- Malaysia (lng=109, lat=4) -->
-        <circle class="map-pin" cx="723" cy="215" r="5.5" onclick="scrollTo('malaysia')" aria-label="Malaysia">
-          <title>Malaysia</title>
-        </circle>
-
-        <!-- Korea (lng=127, lat=37) -->
-        <circle class="map-pin" cx="768" cy="133" r="5.5" onclick="scrollTo('korea')" aria-label="Korea">
-          <title>Korea</title>
-        </circle>
-
-        <!-- Japan (lng=138, lat=36) -->
-        <circle class="map-pin" cx="795" cy="128" r="5.5" onclick="scrollTo('japan')" aria-label="Japan">
-          <title>Japan</title>
-        </circle>
-
-        <!-- Vietnam (lng=107, lat=16) -->
-        <circle class="map-pin" cx="718" cy="185" r="5.5" onclick="scrollTo('vietnam')" aria-label="Vietnam">
-          <title>Vietnam</title>
-        </circle>
-
-        <!-- Hawaii (lng=-157, lat=21) -->
-        <circle class="map-pin" cx="58" cy="173" r="5.5" onclick="scrollTo('hawaii')" aria-label="Hawaii">
-          <title>Hawaii</title>
-        </circle>
-
-        <!-- China (lng=104, lat=35) -->
-        <circle class="map-pin" cx="710" cy="138" r="5.5" onclick="scrollTo('china')" aria-label="China">
-          <title>China</title>
-        </circle>
-
-        <!-- Taiwan (lng=121, lat=23.5) -->
-        <circle class="map-pin" cx="753" cy="166" r="5.5" onclick="scrollTo('taiwan')" aria-label="Taiwan">
-          <title>Taiwan</title>
-        </circle>
-
-        <!-- Cameroon (lng=12, lat=6) -->
-        <circle class="map-pin" cx="480" cy="210" r="5.5" onclick="scrollTo('cameroon')" aria-label="Cameroon">
-          <title>Cameroon</title>
-        </circle>
-
-      </svg>
+      <div id="world-map-container"></div>
       <p class="map-caption">Click a pin to jump to that destination.</p>
     </div>
   </section>
@@ -926,7 +620,119 @@
     </div>
   </footer>
 
+  <!-- D3 world map -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
   <script>
+    // Destination pins
+    const destinations = [
+      { id: 'spain',       name: 'Spain — Camino de Santiago', lat: 42,   lng: -3   },
+      { id: 'switzerland', name: 'Switzerland',                 lat: 47,   lng: 8    },
+      { id: 'turkey',      name: 'Turkey',                      lat: 39,   lng: 35   },
+      { id: 'washington',  name: 'Washington Cascades',         lat: 47,   lng: -121 },
+      { id: 'nepal',       name: 'Nepal',                       lat: 28,   lng: 84   },
+      { id: 'malaysia',    name: 'Malaysia',                    lat: 4,    lng: 109  },
+      { id: 'korea',       name: 'Korea',                       lat: 37,   lng: 127  },
+      { id: 'japan',       name: 'Japan',                       lat: 36,   lng: 138  },
+      { id: 'vietnam',     name: 'Vietnam',                     lat: 16,   lng: 107  },
+      { id: 'hawaii',      name: 'Hawaii',                      lat: 21,   lng: -157 },
+      { id: 'china',       name: 'China',                       lat: 35,   lng: 104  },
+      { id: 'taiwan',      name: 'Taiwan',                      lat: 23.5, lng: 121  },
+      { id: 'cameroon',    name: 'Cameroon',                    lat: 6,    lng: 12   },
+    ];
+
+    const container = document.getElementById('world-map-container');
+    const W = container.clientWidth || 820;
+    const H = Math.round(W * 0.5);
+
+    const svg = d3.select('#world-map-container')
+      .append('svg')
+      .attr('viewBox', `0 0 ${W} ${H}`)
+      .attr('preserveAspectRatio', 'xMidYMid meet')
+      .style('width', '100%')
+      .style('height', 'auto')
+      .style('border-radius', '4px');
+
+    // Ocean background
+    svg.append('rect')
+      .attr('width', W).attr('height', H)
+      .attr('fill', '#eef0f3')
+      .attr('rx', 4);
+
+    const projection = d3.geoNaturalEarth1()
+      .scale(W / 6.28)
+      .translate([W / 2, H / 2]);
+
+    const path = d3.geoPath().projection(projection);
+
+    // Graticule (subtle grid lines)
+    const graticule = d3.geoGraticule().step([30, 30]);
+    svg.append('path')
+      .datum(graticule())
+      .attr('d', path)
+      .attr('fill', 'none')
+      .attr('stroke', '#e4e8ed')
+      .attr('stroke-width', 0.4);
+
+    // Load and draw countries
+    fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+      .then(r => r.json())
+      .then(world => {
+        svg.append('g')
+          .selectAll('path')
+          .data(topojson.feature(world, world.objects.countries).features)
+          .join('path')
+          .attr('d', path)
+          .attr('fill', '#ddd8d0')
+          .attr('stroke', '#ccc7be')
+          .attr('stroke-width', 0.5)
+          .attr('stroke-linejoin', 'round');
+
+        // Country borders
+        svg.append('path')
+          .datum(topojson.mesh(world, world.objects.countries, (a, b) => a !== b))
+          .attr('d', path)
+          .attr('fill', 'none')
+          .attr('stroke', '#ccc7be')
+          .attr('stroke-width', 0.3);
+
+        // Destination pins
+        destinations.forEach(d => {
+          const coords = projection([d.lng, d.lat]);
+          if (!coords) return;
+          const [x, y] = coords;
+
+          const g = svg.append('g')
+            .style('cursor', 'pointer')
+            .on('click', () => jumpTo(d.id))
+            .on('mouseover', function() {
+              d3.select(this).select('circle').attr('fill', '#2c4d7f').attr('r', 7);
+            })
+            .on('mouseout', function() {
+              d3.select(this).select('circle').attr('fill', '#4a6fa5').attr('r', 5.5);
+            });
+
+          g.append('circle')
+            .attr('cx', x).attr('cy', y)
+            .attr('r', 5.5)
+            .attr('fill', '#4a6fa5')
+            .style('transition', 'fill 0.15s');
+
+          g.append('title').text(d.name);
+        });
+      })
+      .catch(() => {
+        // Fallback if CDN unavailable
+        svg.append('text')
+          .attr('x', W / 2).attr('y', H / 2)
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#bbb')
+          .attr('font-family', 'Helvetica Neue, Arial, sans-serif')
+          .attr('font-size', 13)
+          .text('Map unavailable offline');
+      });
+
+    // Card interaction
     function toggleCard(header) {
       const card = header.closest('.dest-card');
       const body = card.querySelector('.dest-body');
@@ -939,7 +745,7 @@
       }
     }
 
-    function scrollTo(id) {
+    function jumpTo(id) {
       const el = document.getElementById('dest-' + id);
       if (!el) return;
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
