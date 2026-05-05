@@ -39,6 +39,8 @@
     }
 
     .dest-card-header {
+      position: relative;
+      overflow: hidden;
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -47,7 +49,7 @@
       border: 1px solid #e8e4df;
       border-radius: 6px;
       cursor: pointer;
-      transition: box-shadow 0.2s, border-color 0.2s;
+      transition: box-shadow 0.2s, border-color 0.2s, padding 0.35s;
       user-select: none;
     }
     .dest-card-header:hover {
@@ -55,10 +57,45 @@
       border-color: #d0c9c0;
     }
     .dest-card.open .dest-card-header {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
-      border-bottom-color: #f0ece6;
+      border-bottom-color: transparent;
     }
+
+    /* Photo background layer inside header */
+    .dest-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 0.35s;
+      z-index: 0;
+    }
+    .dest-card-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.58) 100%);
+    }
+    .dest-card.open .dest-card-bg { opacity: 1; }
+
+    /* Lift all header children above the bg */
+    .dest-thumb, .dest-info, .dest-toggle {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hide thumbnail when bg photo is showing */
+    .dest-card.open .dest-thumb { display: none; }
+
+    /* Text goes white over the photo */
+    .dest-card.open .dest-name   { color: #fff; }
+    .dest-card.open .dest-tag    { color: rgba(255,255,255,0.8); }
+    .dest-card.open .dest-hook   { color: rgba(255,255,255,0.72); }
+    .dest-card.open .dest-toggle { color: rgba(255,255,255,0.6); }
 
     .dest-thumb {
       width: 68px;
@@ -245,6 +282,7 @@
     <!-- 1. Spain -->
     <div class="dest-card" id="dest-spain">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/spain.jpeg')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/spain.jpeg" alt="Camino de Santiago, Spain"/>
         <div class="dest-info">
           <div class="dest-tag">Camino de Santiago</div>
@@ -254,7 +292,7 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/spain.jpeg" alt="Spain" />
+
         <div class="dest-preview-inner">
           <p class="dest-preview-text">800 km on foot across northern Spain — the Camino de Santiago is less a walk than a slow shedding, a daily negotiation between the body and the will. I started in Saint-Jean-Pied-de-Port with blisters by day two and a deep suspicion that I had no idea what I was doing. I was right, and it didn't matter.</p>
           <a href="destinations/spain.html" class="dest-read-more">Read more &rarr;</a>
@@ -265,6 +303,7 @@
     <!-- 2. Switzerland -->
     <div class="dest-card" id="dest-switzerland">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/switzerland.jpeg')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/switzerland.jpeg" alt="Switzerland"/>
         <div class="dest-info">
           <div class="dest-name">Switzerland</div>
@@ -273,7 +312,6 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/switzerland.jpeg" alt="Switzerland" />
         <div class="dest-preview-inner">
           <p class="dest-preview-text">After the Camino, Switzerland felt like landing on another planet — clean, quiet, precise, expensive. I spent most of my time in the mountains, walking trails that were almost insultingly well-maintained compared to the dirt tracks I'd just finished, wondering what it says about a country that its hiking signs have their own typeface.</p>
           <a href="destinations/switzerland.html" class="dest-read-more">Read more &rarr;</a>
@@ -284,6 +322,7 @@
     <!-- 3. Turkey -->
     <div class="dest-card" id="dest-turkey">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/turkey.jpeg')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/turkey.jpeg" alt="Turkey"/>
         <div class="dest-info">
           <div class="dest-name">Turkey</div>
@@ -292,7 +331,6 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/turkey.jpeg" alt="Turkey" />
         <div class="dest-preview-inner">
           <p class="dest-preview-text">Istanbul is a city that refuses to be summarized — ancient and loud and layered, where Europe ends and Asia begins in the middle of a strait. I stayed longer than planned, which is the truest thing I can say about it. Cappadocia, a week later, looked exactly like the photos and somehow still managed to surprise me.</p>
           <a href="destinations/turkey.html" class="dest-read-more">Read more &rarr;</a>
@@ -303,6 +341,7 @@
     <!-- 4. Washington Cascades -->
     <div class="dest-card" id="dest-washington">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/washington.jpeg')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/washington.jpeg" alt="Washington Cascades"/>
         <div class="dest-info">
           <div class="dest-tag">Washington State</div>
@@ -312,7 +351,6 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/washington.jpeg" alt="Washington Cascades" />
         <div class="dest-preview-inner">
           <p class="dest-preview-text">The Cascades are not gentle. Glaciers, active volcanoes, wildflower meadows at elevation, old-growth forest that makes you feel small in the right way — the kind of landscape that makes you question why you ever live anywhere else. A brief return to the US, mid-year, which felt stranger than any of the countries I'd been visiting.</p>
           <a href="destinations/washington.html" class="dest-read-more">Read more &rarr;</a>
@@ -323,6 +361,7 @@
     <!-- 5. Nepal -->
     <div class="dest-card" id="dest-nepal">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/nepal.jpg')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/nepal.jpg" alt="Nepal"/>
         <div class="dest-info">
           <div class="dest-name">Nepal</div>
@@ -331,7 +370,6 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/nepal.jpg" alt="Nepal" />
         <div class="dest-preview-inner">
           <p class="dest-preview-text">I finally arrived in Nepal, ready to start the journey I had dreamed of for ten years. After three days of flying — exhausted and ready for a real bed — the multicolored flashing lights of the city below, disorganized and neon, twinkling in the dark, felt like a personal welcome. It turned out I had landed during Diwali, which, as the locals say, is for "Hindus, Buddhists, and tourists" alike.</p>
           <a href="destinations/nepal.html" class="dest-read-more">Read more &rarr;</a>
@@ -342,6 +380,7 @@
     <!-- 6. Malaysia -->
     <div class="dest-card" id="dest-malaysia">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/malaysia.jpeg')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/malaysia.jpeg" alt="Malaysia"/>
         <div class="dest-info">
           <div class="dest-name">Malaysia</div>
@@ -350,7 +389,6 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/malaysia.jpeg" alt="Malaysia" />
         <div class="dest-preview-inner">
           <p class="dest-preview-text">Kuala Lumpur operates at a pace that feels simultaneously chaotic and functional — towers and street hawkers and colonial buildings and rainforest, all stacked on top of each other. The food alone is worth the trip: Indian, Chinese, Malay, and everything in between, available at 2am from a cart on the sidewalk.</p>
           <a href="destinations/malaysia.html" class="dest-read-more">Read more &rarr;</a>
@@ -361,6 +399,7 @@
     <!-- 7. Korea -->
     <div class="dest-card" id="dest-korea">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/korea.jpeg')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/korea.jpeg" alt="Korea"/>
         <div class="dest-info">
           <div class="dest-name">Korea</div>
@@ -369,7 +408,6 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/korea.jpeg" alt="Korea" />
         <div class="dest-preview-inner">
           <p class="dest-preview-text">Seoul is organized around excellence in a way that's visible from the street — study cafes full at midnight, hagwons running past dinnertime, the collective pressure that produces both extraordinary achievement and extraordinary burnout. I ate my way through the city and thought about it a lot.</p>
           <a href="destinations/korea.html" class="dest-read-more">Read more &rarr;</a>
@@ -380,6 +418,7 @@
     <!-- 8. Japan -->
     <div class="dest-card" id="dest-japan">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/japan.JPG')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/japan.JPG" alt="Japan"/>
         <div class="dest-info">
           <div class="dest-name">Japan</div>
@@ -388,7 +427,6 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/japan.JPG" alt="Japan" />
         <div class="dest-preview-inner">
           <p class="dest-preview-text">Japan rewards slowness. The more I tried to see, the less I actually experienced; the more I wandered without an itinerary, the more the country opened up. Kyoto at 6am, before the tourists arrive, is as quiet as a held breath — and then the crowds come, and it becomes something else entirely, and somehow that's fine too.</p>
           <a href="destinations/japan.html" class="dest-read-more">Read more &rarr;</a>
@@ -399,6 +437,7 @@
     <!-- 9. Vietnam -->
     <div class="dest-card" id="dest-vietnam">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/vietnam.jpeg')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/vietnam.jpeg" alt="Vietnam"/>
         <div class="dest-info">
           <div class="dest-name">Vietnam</div>
@@ -407,7 +446,6 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/vietnam.jpeg" alt="Vietnam" />
         <div class="dest-preview-inner">
           <p class="dest-preview-text">Vietnam is long and loud and beautiful, and I loved almost all of it — including the overnight buses, which I loved significantly less than the rest. Ha Long Bay in the early morning fog, Hội An at night, Hanoi's Old Quarter on a borrowed bicycle: it is a country that accumulates experiences faster than you can process them.</p>
           <a href="destinations/vietnam.html" class="dest-read-more">Read more &rarr;</a>
@@ -418,6 +456,7 @@
     <!-- 10. Hawaii -->
     <div class="dest-card" id="dest-hawaii">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/hawaii.jpg')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/hawaii.jpg" alt="Hawaii"/>
         <div class="dest-info">
           <div class="dest-name">Hawaii</div>
@@ -426,7 +465,6 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/hawaii.jpg" alt="Hawaii" />
         <div class="dest-preview-inner">
           <p class="dest-preview-text">After months in Asia, landing in Hawaii felt like the world had been turned down three notches. Familiar chain restaurants, English everywhere, no scramble for a SIM card. The specific strangeness of returning to America in the middle of a year abroad — familiar enough to feel like home, unfamiliar enough to feel like a question.</p>
           <a href="destinations/hawaii.html" class="dest-read-more">Read more &rarr;</a>
@@ -437,6 +475,7 @@
     <!-- 11. China -->
     <div class="dest-card" id="dest-china">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/china.jpg')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/china.jpg" alt="China"/>
         <div class="dest-info">
           <div class="dest-name">China</div>
@@ -445,7 +484,6 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/china.jpg" alt="China" />
         <div class="dest-preview-inner">
           <p class="dest-preview-text">In the first week, I discovered I was not as good at using chopsticks as I thought I was. I managed to spill grease on every single item of clothing I brought, developed a new skill for removing grease stains, and by the end had progressed to a 1-in-3 success rate — though if it's hot pot, forget it.</p>
           <a href="destinations/china.html" class="dest-read-more">Read more &rarr;</a>
@@ -456,6 +494,7 @@
     <!-- 12. Taiwan -->
     <div class="dest-card" id="dest-taiwan">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/taiwan.jpeg')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/taiwan.jpeg" alt="Taiwan"/>
         <div class="dest-info">
           <div class="dest-name">Taiwan</div>
@@ -464,7 +503,6 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/taiwan.jpeg" alt="Taiwan" />
         <div class="dest-preview-inner">
           <p class="dest-preview-text">Taiwan is the place that surprised me most. I went with low expectations and left wondering why I hadn't come sooner — great food, genuinely kind people, mountains that appear without warning at the edge of the city, and the best boba I've had anywhere. Also: a lost passport, a minor bureaucratic adventure, and a hiking encounter I still can't fully explain.</p>
           <a href="destinations/taiwan.html" class="dest-read-more">Read more &rarr;</a>
@@ -475,6 +513,7 @@
     <!-- 13. Cameroon -->
     <div class="dest-card" id="dest-cameroon">
       <div class="dest-card-header" onclick="toggleCard(this)">
+        <div class="dest-card-bg" style="background-image: url('travel_thumbnail_photos/cameroon.jpeg')"></div>
         <img class="dest-thumb" src="travel_thumbnail_photos/cameroon.jpeg" alt="Cameroon"/>
         <div class="dest-info">
           <div class="dest-name">Cameroon</div>
@@ -483,7 +522,6 @@
         <span class="dest-toggle">▾</span>
       </div>
       <div class="dest-preview-body">
-        <img class="dest-preview-hero" src="travel_thumbnail_photos/cameroon.jpeg" alt="Cameroon" />
         <div class="dest-preview-inner">
           <p class="dest-preview-text">I arrived in Cameroon after a flight that failed to land on its first attempt, diverted to a different city, then took off again five hours later. Six weeks followed: teaching Newton's Laws with bottle rockets, cold bucket showers, bucket laundry, extraordinary fruit, and a lot of things I didn't expect to reckon with. Worth every second.</p>
           <a href="destinations/cameroon.html" class="dest-read-more">Read more &rarr;</a>
