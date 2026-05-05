@@ -372,12 +372,13 @@ nav .nav-links a.active {
   margin-bottom: 0.75rem;
 }
 .dest-read-more {
-  display: inline-block;
+  display: block;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   font-size: 0.75rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #4a6fa5;
+  margin-top: 0.6rem;
 }
 .dest-read-more:hover { color: #2c4d7f; text-decoration: underline; }
 
