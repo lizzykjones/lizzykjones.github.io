@@ -42,14 +42,25 @@
     <!-- Section 1: Orbital Mechanics -->
     <div class="research-section">
       <h2>Orbital Mechanics</h2>
-      <span class="section-tag">Astrophysics</span>
+      <span class="section-tag">Astrophysics &mdash; Harvey Mudd College</span>
 
       <div class="project-card">
-        <h3>Understanding Strength Scaling in Mean Motion Resonances (MMRs)</h3>
+        <h3>Why Higher Order Mean Motion Resonances are Weak: A Physical and Geometric Model</h3>
         <p>
-          An investigation into how resonance strength scales within mean motion resonances —
-          exploring the dynamical structure and stability of resonant orbital configurations.
+          Mean motion resonances (MMRs) play a pivotal role in planetary dynamics, serving as both a source of stability and chaos.
+          MMR strengths scale at small eccentricities as <em>e<sup>k</sup></em>, where <em>k</em> is the order of the resonance —
+          a crucial result which helps characterize unstable regions where MMRs overlap. The traditional derivation using a
+          perturbation series expansion provides little physical intuition. In this project we present a simple physical explanation
+          for this scaling result. In the limit that planets are closely spaced, interplanetary interactions are negligible except
+          at close encounters when one planet overtakes the other and imparts a gravitational "kick" to the planet's mean motion.
+          By considering previously known Fourier expansions for these kicks, we show that the <em>k</em>-fold symmetry in conjunction
+          locations leads to a cancellation of terms up to order <em>e<sup>k−1</sup></em>.
         </p>
+        <div class="project-links">
+          <a href="planetary_conj_details.html">More Details</a>
+          <a href="pdfs/thesis.pdf" target="_blank">Thesis (PDF)</a>
+          <a href="pdfs/planetary_conj.pdf" target="_blank">Conjunctions Report (PDF)</a>
+        </div>
       </div>
     </div>
 
@@ -59,29 +70,64 @@
       <span class="section-tag">Particle Physics</span>
 
       <div class="project-card">
-        <h3>Inference-Based Approach to Predicting Neutrino Flavor Oscillation at AMNH</h3>
+        <h3>Benchmarking Supernova Pointing using Machine Learning &mdash; CERN</h3>
         <p>
-          Developing an inference-based framework to predict neutrino flavor oscillation,
-          conducted in collaboration with the American Museum of Natural History (AMNH).
+          Core-collapse supernovae are some of the most energetic events in the universe, but many aspects of the explosion
+          mechanism and the associated neutrino emission remain poorly understood. The next-generation Hyper-Kamiokande (HK)
+          experiment in Japan will be the world's largest water Cherenkov detector and is expected to collect orders of magnitude
+          more neutrinos than the current Super-Kamiokande detector during the next nearby core collapse supernova. We simulate
+          supernova events in HK and apply machine-learning algorithms to reconstruct the supernova direction and differentiate
+          between different theoretical emission models. We compare three architectures — convolutional neural networks (CNNs),
+          graph neural networks (GNNs), and sparse CNNs — and evaluate their ability to infer the supernova direction from simulated
+          photomultiplier tube hit patterns. Our results show that the sparse CNN significantly outperforms the other architectures:
+          for a supernova at 8 kpc, it reconstructs the direction to within 2.4° on average.
         </p>
+        <div class="project-links">
+          <a href="pdfs/supernova_ml.pdf" target="_blank">Project Report (PDF)</a>
+        </div>
       </div>
 
       <div class="project-card">
-        <h3>Machine Learning for Supernova Pointing in Hyper-Kamiokande</h3>
+        <h3>An Inference-Based Study of Neutrino Oscillation &mdash; American Museum of Natural History</h3>
         <p>
-          Applying machine learning techniques to improve supernova pointing accuracy
-          using neutrino detection data from the Hyper-Kamiokande experiment.
+          The solar electron number density has important implications for understanding solar and stellar physics, yet its
+          precise distribution within the Sun is unknown. While current models are derived from measurements at the solar surface,
+          it would be a novel approach to use Earth-based measurements to predict electron distribution in the Sun. Electron number
+          density dictates the flavor evolution of neutrinos as they stream radially outward from the Sun, and thus determines
+          their flavor when they reach detectors on Earth. In this study, we explored an inference-based approach that uses neutrino
+          flavor measurements from Earth-bound detectors to extrapolate the Sun's electron density function. We studied logistic and
+          exponential forms of electron number density and ultimately sought the sparsest amount of data required to place useful
+          constraints on the model.
         </p>
+        <div class="project-links">
+          <a href="pdfs/inference_neutrino_osc.pdf" target="_blank">Project Report (PDF)</a>
+        </div>
       </div>
     </div>
+
+    <!--
+    <div class="research-section">
+      <h2>Other Projects</h2>
+      <div class="project-card">
+        <h3>A Study of the Restricted Three Body Problem — Harvey Mudd College</h3>
+        <div class="project-links">
+          <a href="pdfs/restricted_three_body.pdf" target="_blank">Project Report (PDF)</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <h3>Study of an Underdamped, Driven Oscillator — Duke University</h3>
+        <div class="project-links">
+          <a href="pdfs/underdamped_oscillator.pdf" target="_blank">Project Report (PDF)</a>
+        </div>
+      </div>
+    </div>
+    -->
 
   </main>
 
   <!-- Footer -->
   <footer>
-    <div>
-      <p>&copy; 2026 Elizabeth Jones</p>
-    </div>
+    <p>&copy; 2026 Elizabeth Jones</p>
   </footer>
 
 </body>
