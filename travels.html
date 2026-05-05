@@ -139,73 +139,41 @@
   <section class="map-section">
     <div class="inner">
       <div id="world-map-container"></div>
-      <p class="map-caption">Click a pin to jump to that destination.</p>
+      <p class="map-caption">Hover a pin to preview. Click to jump.</p>
     </div>
   </section>
 
-  <!-- Sticky Horizontal Timeline -->
-  <div class="trip-timeline-wrap" id="trip-timeline-wrap">
-    <div class="trip-timeline">
-
-      <div class="trip-year-group" id="group-gapyear">
-        <div class="trip-year-label">Gap Year &rsquo;25&ndash;26</div>
-
-        <div class="timeline-node active" id="tnode-spain" data-dest="spain" onclick="jumpTo('spain')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">Spain</div>
-        </div>
-        <div class="timeline-node" id="tnode-switzerland" data-dest="switzerland" onclick="jumpTo('switzerland')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">Switzerland</div>
-        </div>
-        <div class="timeline-node" id="tnode-turkey" data-dest="turkey" onclick="jumpTo('turkey')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">Turkey</div>
-        </div>
-        <div class="timeline-node" id="tnode-washington" data-dest="washington" onclick="jumpTo('washington')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">Cascades</div>
-        </div>
-        <div class="timeline-node" id="tnode-nepal" data-dest="nepal" onclick="jumpTo('nepal')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">Nepal</div>
-        </div>
-        <div class="timeline-node" id="tnode-malaysia" data-dest="malaysia" onclick="jumpTo('malaysia')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">Malaysia</div>
-        </div>
-        <div class="timeline-node" id="tnode-korea" data-dest="korea" onclick="jumpTo('korea')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">Korea</div>
-        </div>
-        <div class="timeline-node" id="tnode-japan" data-dest="japan" onclick="jumpTo('japan')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">Japan</div>
-        </div>
-        <div class="timeline-node" id="tnode-vietnam" data-dest="vietnam" onclick="jumpTo('vietnam')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">Vietnam</div>
-        </div>
-        <div class="timeline-node" id="tnode-hawaii" data-dest="hawaii" onclick="jumpTo('hawaii')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">Hawaii</div>
-        </div>
-        <div class="timeline-node" id="tnode-china" data-dest="china" onclick="jumpTo('china')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">China</div>
-        </div>
-        <div class="timeline-node" id="tnode-taiwan" data-dest="taiwan" onclick="jumpTo('taiwan')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">Taiwan</div>
-        </div>
-        <div class="timeline-node" id="tnode-cameroon" data-dest="cameroon" onclick="jumpTo('cameroon')">
-          <div class="timeline-node-dot"></div>
-          <div class="timeline-node-label">Cameroon</div>
-        </div>
-      </div><!-- /group-gapyear -->
-
-    </div><!-- /trip-timeline -->
-  </div><!-- /trip-timeline-wrap -->
+  <!-- Map tooltip -->
+  <div id="map-tooltip" style="
+    display: none;
+    position: fixed;
+    z-index: 200;
+    background: #fff;
+    border: 1px solid #e8e4df;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    overflow: hidden;
+    pointer-events: none;
+    width: 160px;
+  ">
+    <img id="map-tooltip-img" src="" alt="" style="width:160px;height:100px;object-fit:cover;display:block;" />
+    <div style="padding: 0.5rem 0.65rem 0.55rem;">
+      <div id="map-tooltip-name" style="
+        font-family: 'EB Garamond', Georgia, serif;
+        font-size: 1rem;
+        color: #1a1a1a;
+        line-height: 1.2;
+      "></div>
+      <div style="
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: #bbb;
+        margin-top: 0.2rem;
+      ">click to jump</div>
+    </div>
+  </div>
 
   <!-- Destinations -->
   <main class="main-content">
@@ -461,20 +429,46 @@
   <script>
     // ---- World Map ----
     const destinations = [
-      { id: 'spain',       name: 'Spain — Camino de Santiago', lat: 42,   lng: -3   },
-      { id: 'switzerland', name: 'Switzerland',                 lat: 47,   lng: 8    },
-      { id: 'turkey',      name: 'Turkey',                      lat: 39,   lng: 35   },
-      { id: 'washington',  name: 'Washington Cascades',         lat: 47,   lng: -121 },
-      { id: 'nepal',       name: 'Nepal',                       lat: 28,   lng: 84   },
-      { id: 'malaysia',    name: 'Malaysia',                    lat: 4,    lng: 109  },
-      { id: 'korea',       name: 'Korea',                       lat: 37,   lng: 127  },
-      { id: 'japan',       name: 'Japan',                       lat: 36,   lng: 138  },
-      { id: 'vietnam',     name: 'Vietnam',                     lat: 16,   lng: 107  },
-      { id: 'hawaii',      name: 'Hawaii',                      lat: 21,   lng: -157 },
-      { id: 'china',       name: 'China',                       lat: 35,   lng: 104  },
-      { id: 'taiwan',      name: 'Taiwan',                      lat: 23.5, lng: 121  },
-      { id: 'cameroon',    name: 'Cameroon',                    lat: 6,    lng: 12   },
+      { id: 'spain',       name: 'Spain',              thumb: 'travel_thumbnail_photos/spain.jpeg',       lat: 42,   lng: -3   },
+      { id: 'switzerland', name: 'Switzerland',        thumb: 'travel_thumbnail_photos/switzerland.jpeg', lat: 47,   lng: 8    },
+      { id: 'turkey',      name: 'Turkey',             thumb: 'travel_thumbnail_photos/turkey.jpeg',      lat: 39,   lng: 35   },
+      { id: 'washington',  name: 'The Cascades',       thumb: 'travel_thumbnail_photos/washington.jpeg',  lat: 47,   lng: -121 },
+      { id: 'nepal',       name: 'Nepal',              thumb: 'travel_thumbnail_photos/nepal.jpg',        lat: 28,   lng: 84   },
+      { id: 'malaysia',    name: 'Malaysia',           thumb: 'travel_thumbnail_photos/malaysia.jpeg',    lat: 4,    lng: 109  },
+      { id: 'korea',       name: 'Korea',              thumb: 'travel_thumbnail_photos/korea.jpeg',       lat: 37,   lng: 127  },
+      { id: 'japan',       name: 'Japan',              thumb: 'travel_thumbnail_photos/japan.JPG',        lat: 36,   lng: 138  },
+      { id: 'vietnam',     name: 'Vietnam',            thumb: 'travel_thumbnail_photos/vietnam.jpeg',     lat: 16,   lng: 107  },
+      { id: 'hawaii',      name: 'Hawaii',             thumb: 'travel_thumbnail_photos/hawaii.jpg',       lat: 21,   lng: -157 },
+      { id: 'china',       name: 'China',              thumb: 'travel_thumbnail_photos/china.jpg',        lat: 35,   lng: 104  },
+      { id: 'taiwan',      name: 'Taiwan',             thumb: 'travel_thumbnail_photos/taiwan.jpeg',      lat: 23.5, lng: 121  },
+      { id: 'cameroon',    name: 'Cameroon',           thumb: 'travel_thumbnail_photos/cameroon.jpeg',    lat: 6,    lng: 12   },
     ];
+
+    // ---- Tooltip ----
+    const tooltip     = document.getElementById('map-tooltip');
+    const tooltipImg  = document.getElementById('map-tooltip-img');
+    const tooltipName = document.getElementById('map-tooltip-name');
+
+    function showTooltip(d, event) {
+      tooltipImg.src = d.thumb;
+      tooltipImg.alt = d.name;
+      tooltipName.textContent = d.name;
+      tooltip.style.display = 'block';
+      positionTooltip(event);
+    }
+    function positionTooltip(event) {
+      const tw = 160, th = 150;
+      const pad = 14;
+      let x = event.clientX + pad;
+      let y = event.clientY + pad;
+      if (x + tw > window.innerWidth  - 8) x = event.clientX - tw - pad;
+      if (y + th > window.innerHeight - 8) y = event.clientY - th - pad;
+      tooltip.style.left = x + 'px';
+      tooltip.style.top  = y + 'px';
+    }
+    function hideTooltip() {
+      tooltip.style.display = 'none';
+    }
 
     const container = document.getElementById('world-map-container');
     const W = container.clientWidth || 820;
@@ -535,11 +529,16 @@
           const g = svg.append('g')
             .style('cursor', 'pointer')
             .on('click', () => jumpTo(d.id))
-            .on('mouseover', function() {
+            .on('mouseover', function(event) {
               d3.select(this).select('circle').attr('fill', '#2c4d7f').attr('r', 7);
+              showTooltip(d, event);
+            })
+            .on('mousemove', function(event) {
+              positionTooltip(event);
             })
             .on('mouseout', function() {
               d3.select(this).select('circle').attr('fill', '#4a6fa5').attr('r', 5.5);
+              hideTooltip();
             });
 
           g.append('circle')
@@ -547,8 +546,6 @@
             .attr('r', 5.5)
             .attr('fill', '#4a6fa5')
             .style('transition', 'fill 0.15s');
-
-          g.append('title').text(d.name);
         });
       })
       .catch(() => {
@@ -574,13 +571,12 @@
       }
     }
 
-    // ---- Jump to destination (from map pin or timeline node) ----
+    // ---- Jump to destination (from map pin) ----
     function jumpTo(id) {
       const el = document.getElementById('dest-' + id);
       if (!el) return;
       const navH = document.querySelector('nav').offsetHeight || 56;
-      const timelineH = document.getElementById('trip-timeline-wrap').offsetHeight || 48;
-      const offset = navH + timelineH + 16;
+      const offset = navH + 16;
       const top = el.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top, behavior: 'smooth' });
       if (!el.classList.contains('open')) {
@@ -589,32 +585,6 @@
         el.classList.add('open');
       }
     }
-
-    // ---- Timeline: highlight active node on scroll ----
-    const cardIds = [
-      'spain','switzerland','turkey','washington','nepal',
-      'malaysia','korea','japan','vietnam','hawaii','china','taiwan','cameroon'
-    ];
-
-    const observers = {};
-    cardIds.forEach(id => {
-      const card = document.getElementById('dest-' + id);
-      if (!card) return;
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          const node = document.getElementById('tnode-' + id);
-          if (!node) return;
-          if (entry.isIntersecting) {
-            document.querySelectorAll('.timeline-node').forEach(n => n.classList.remove('active'));
-            node.classList.add('active');
-            // Scroll timeline node into view
-            node.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          }
-        });
-      }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-      obs.observe(card);
-      observers[id] = obs;
-    });
   </script>
 
 </body>
