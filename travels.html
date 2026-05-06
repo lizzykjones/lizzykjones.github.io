@@ -677,6 +677,18 @@
       });
 
     // ---- Card toggle (preview expand/collapse) ----
+    let scrollPaused = false;
+    let scrollPauseTimer = null;
+
+    function setActiveNode(id) {
+      document.querySelectorAll('.timeline-node').forEach(n => n.classList.remove('active'));
+      const node = document.getElementById('tnode-' + id);
+      if (node) {
+        node.classList.add('active');
+        node.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
     function toggleCard(header) {
       const card = header.closest('.dest-card');
       const body = card.querySelector('.dest-preview-body');
@@ -686,8 +698,20 @@
       } else {
         body.style.maxHeight = body.scrollHeight + 'px';
         card.classList.add('open');
+        // Activate the timeline dot for this card
+        const id = card.id.replace('dest-', '');
+        scrollPaused = true;
+        clearTimeout(scrollPauseTimer);
+        setActiveNode(id);
       }
     }
+
+    window.addEventListener('scroll', () => {
+      if (scrollPaused) {
+        clearTimeout(scrollPauseTimer);
+        scrollPauseTimer = setTimeout(() => { scrollPaused = false; }, 600);
+      }
+    }, { passive: true });
 
     // ---- Jump to destination (from map pin or timeline node) ----
     function jumpTo(id) {
@@ -717,6 +741,7 @@
       if (!card) return;
       const obs = new IntersectionObserver(entries => {
         entries.forEach(entry => {
+          if (scrollPaused) return;
           const node = document.getElementById('tnode-' + id);
           if (!node) return;
           if (entry.isIntersecting) {
